@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "SignIn";
+}
+
+<h2>SignIn</h2>
+
+
+<div class="wrapper">
+    @using (Html.BeginForm())
+    {
+        <p><input type="image" src="~/Content/img/sdsds.jpg" width="25" height="25" /> <h2 class="form-signin-heading text-center">Bienvenido!</h2></p>
+        <p><small>Digite su DNI:</small></p>
+        <input type="text" class="form-control" name="dni" placeholder="DNI" required="" autofocus="" />
+
+        <label class="checkbox">
+            <input type="checkbox" value="recordarme" id="rememberMe" name="Recordarme"> Recordarme
+        </label>
+        <button class="btn btn-lg btn-success btn-block" type="submit">Log In!</button>
+    }
+</div>
+
+    <p>@ViewBag.mensaje</p>

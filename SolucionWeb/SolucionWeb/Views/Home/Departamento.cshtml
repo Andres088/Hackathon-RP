@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Departamento";
+
+
+    List<string> Departamentos = new List<string>
+    { "LIMA","ANCASH","AREQUIPA","CAJAMARCA","CUSCO","HUANUCO",
+      "JUNIN","LA LIBERTAD","LAMBAYEQUE","PIURA","PUNO","UCAYALI"};
+}
+<h1>Bienvenido @ViewBag.nombre</h1>
+
+<h2>En que departamento estás?</h2>
+
+<div class="list-group">
+    @{
+        foreach (string departamento in Departamentos)
+        {
+            @Html.ActionLink(@departamento, "Mall", "Home", new { departamento = @departamento }, new { @class = "list-group-item list-group-item-action" })
+        }
+    }
+</div>
+
+

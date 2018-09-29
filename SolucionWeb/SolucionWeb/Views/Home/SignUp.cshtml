@@ -5,3 +5,28 @@
 
 <h2>SignUp</h2>
 
+
+<h3>Registrese</h3>
+
+
+@using (Html.BeginForm())
+{
+    <p>DNI</p>
+    <input type="text" name="dni" />
+    <p>Nombre</p>
+    <input type="text" name="nombre" />
+    <p>Apellido Paterno</p>
+    <input type="text" name="apellidoPaterno" />
+    <p>Apellido Materno</p>
+    <input type="text" name="apellidoMaterno" />
+    <p>Email</p>
+    <input type="text" name="email" />
+    <p>Telefono</p>
+    <input type="text" name="telefono" />
+    <p>Departamento</p>
+    <input type="text" name="departamento" />
+    <input type="submit" />
+}
+
+
+<p>@ViewBag.mensaje</p>
