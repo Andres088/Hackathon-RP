@@ -8,25 +8,41 @@
     <link rel="stylesheet" type="text/css" href="/Content/styles.css" media="screen" />
 </head>
 <body>
-    <h2>Datos de la Tienda  @ViewBag.tienda.nomb_com_c_vnomb</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
 
-    <p>Ubicación: Tercer piso</p>
+            <div class="col">
 
-    <p>Horarios de atención: 10 am a 10 pm</p>
+                <h2>Datos de la Tienda  @ViewBag.tienda.nomb_com_c_vnomb</h2>
 
-    <div style="width:761px;height:426px;background-color:white;float:left;background-image: url(/Content/img/guardia_civil.png);">
-        <svg xmlns="http://www.w3.org/2000/svg" version='1.1' width="100%" height="100%">
-            @{
-                foreach (Ubicacion ubi in ViewBag.Ubicaciones)
-                {
-                    <line x1=@ubi.x1.ToString() y1=@ubi.y1.ToString() x2=@ubi.x2.ToString() y2=@ubi.y2.ToString() style='stroke:blue;stroke-width:5;stroke-miterlimit:10' />
-                    if (ubi.orden == ViewBag.Ubicaciones.Count)
-                    {
-                        <circle class="endpoint" cx=@ubi.x2.ToString() cy=@ubi.y2.ToString() r="10" style='stroke:black;stroke-width:5;stroke-miterlimit:10;fill:red' />
-                    }
-                }
-            }
+                <h3>Ubicación: Tercer piso</h3>
 
-        </svg>
-    </div>
+                <h3>Horarios de atención: 11 am a 10 pm</h3>
+
+                <div style="width:761px;height:426px;background-color:white;float:left;background-image: url(/Content/img/guardia_civil.png);">
+                    <svg xmlns="http://www.w3.org/2000/svg" version='1.1' width="100%" height="100%">
+                        @{
+                            foreach (Ubicacion ubi in ViewBag.Ubicaciones)
+                            {
+                                <line x1=@ubi.x1.ToString() y1=@ubi.y1.ToString() x2=@ubi.x2.ToString() y2=@ubi.y2.ToString() style='stroke:blue;stroke-width:5;stroke-miterlimit:10' />
+                                if (ubi.orden == ViewBag.Ubicaciones.Count)
+                                {
+                                    <circle class="endpoint" cx=@ubi.x2.ToString() cy=@ubi.y2.ToString() r="10" style='stroke:black;stroke-width:5;stroke-miterlimit:10;fill:red' />
+                                }
+                            }
+                        }
+
+                    </svg>
+                </div>
+
+
+            </div>
+
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
 </body>
