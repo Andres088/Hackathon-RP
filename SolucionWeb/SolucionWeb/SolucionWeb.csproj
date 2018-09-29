@@ -188,6 +188,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\amarillo_logo.png" />
     <Content Include="Content\img\logo-conecta.jpg" />
     <Content Include="Content\img\logo-registro.jpg" />
     <Content Include="Content\img\mezcla.jpg" />
@@ -230,10 +231,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Home\mapa\jquery-1.10.2.min.js" />
-    <Content Include="Views\Home\mapa\jquery-jvectormap-1.2.2.css" />
-    <Content Include="Views\Home\mapa\jquery-jvectormap-1.2.2.min.js" />
-    <Content Include="Views\Home\mapa\jvectormap.peru.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

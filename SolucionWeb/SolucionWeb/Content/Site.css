@@ -71,7 +71,7 @@ input[type="text"] {
 
 
 #color1 {
-    background-color: #2fe6ca;
+    background-color: #82b7fc;
     overflow: hidden;
 }
 
@@ -98,7 +98,7 @@ input[type="text"] {
     filter: opacity(.5);
 }
 
-#logo-res {
+#logo-res { 
     width: 50%;
     display: block;
     margin-left: auto;
@@ -117,5 +117,45 @@ input[type="text"] {
     filter: opacity(.5);
 }
 
+#mainNav {
+    height: 18%;
+    background-color: #671F75;
+    align-content: center;
+}
+
+#imagen_de_header {
+
+    display: block;
+    margin: auto;
+    height:  20%;
+    width: 100%-10px;
+    
+}
+
+#panelito {
+    background-color: #FFD109;
+
+}
+
+#texto-izquierda {
+
+    top: 50%;
+
+
+}
+
+#imagen_de_footer {
+
+    display: block;
+    margin: auto;
+    height: 20%;
+    width: 100%-10px;
+}
+
+
+#lista_departamentos {
+    font-family: Bahnschrift;
+
+}
 
 

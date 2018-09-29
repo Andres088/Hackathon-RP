@@ -11,13 +11,24 @@
 
 <h2>En que departamento estás?</h2>
 
-<div class="list-group">
-    @{
-        foreach (string departamento in Departamentos)
-        {
-            @Html.ActionLink(@departamento, "Mall", "Home", new { departamento = @departamento }, new { @class = "list-group-item list-group-item-action" })
-        }
-    }
+
+<div class="container well">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="list-group text-center" id="lista_departamentos">
+                @{
+                    foreach (string departamento in Departamentos)
+                    {
+                        @Html.ActionLink(@departamento, "Mall", "Home", new { departamento = @departamento }, new { @class = "list-group-item list-group-item-action" })
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 
