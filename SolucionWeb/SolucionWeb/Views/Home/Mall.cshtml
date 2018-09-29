@@ -4,5 +4,16 @@
 }
 
 <h2>Mall</h2>
-<h3>Has escuchado @ViewBag.departamento</h3>
+<h3>Estás en @ViewBag.departamento</h3>
 
+
+<h2>A qué mall deseas ir?</h2>
+
+<div class="list-group">
+    @{
+        foreach (string mall in ViewBag.lista_malls)
+        {
+            @Html.ActionLink(@mall, "Rubro", "Home", new { pass_mall = @mall }, new { @class = "list-group-item list-group-item-action" })
+        }
+    }
+</div>
