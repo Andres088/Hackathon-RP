@@ -31,9 +31,50 @@ namespace SolucionWeb.Controllers
             return View();
         }
 
+        public ActionResult DetalleTienda(Tienda tienda)
+        {
+            ViewBag.tienda = tienda;
+            return View();
+        }
+
+        public ActionResult Tienda(Rubro rubro)
+        {
+            
+            Mall mall = (Mall)Session["Mall"];
+            string codigo_mall = mall.inm_c_icod;
+            string codigo_rubro = rubro.rubro_c_yid.ToString();
+
+            var client = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod="+codigo_mall+"&pi_rubro_c_yid="+codigo_rubro);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
+            request.AddHeader("Cache-Control", "no-cache");
+            request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+            IRestResponse response = client.Execute(request);
+            RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
+            var lista = deserial.Deserialize<List<Tienda>>(response);
+
+            ViewBag.lista_tiendas = lista;
+            ViewBag.Rubro = rubro;
+            ViewBag.cod1 = codigo_mall;
+            ViewBag.cod2 = codigo_rubro;
+            return View();
+        }
+
         public ActionResult Rubro(Mall mall)
         {
+            
+            RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
+            var client = new RestClient("https://api.devrealplazaonline.com/v1/items?pi_inm_c_icod="+ mall.inm_c_icod.ToString());
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Postman-Token", "52625167-ff0e-4e67-9313-739727ab384e");
+            request.AddHeader("Cache-Control", "no-cache");
+            request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+            IRestResponse response = client.Execute(request);
+            var lista = deserial.Deserialize<List<Rubro>>(response);
+
+            ViewBag.lista_rubros = lista;
             ViewBag.mall = mall;
+            Session["Mall"] = mall;
             return View();
         }
 
@@ -187,5 +228,19 @@ namespace SolucionWeb.Controllers
         public string inm_c_vnomb { get; set; }
         public float inm_c_vlatitud { get; set; }
         public float inm_c_vlongitud { get; set; }
+    }
+
+    public class Rubro
+    {
+        public int rubro_c_yid { get; set; }
+        public string rubro_c_vnomb { get; set; }
+        public string loc_tipo_c_vnomb { get; set; }
+    }
+
+    public class Tienda
+    {
+        public int inm_c_icod { get; set; }
+        public string loc_c_ccod { get; set; }
+        public string nomb_com_c_vnomb { get; set; }
     }
 }

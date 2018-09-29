@@ -1,0 +1,27 @@
+﻿@using SolucionWeb.Controllers;
+
+@{
+    ViewBag.Title = "Tienda";
+}
+
+<h2>Tienda</h2>
+
+<h3>Estás en @ViewBag.rubro.rubro_c_vnomb</h3>
+
+<p>Qué tiendas te gustaría visitar?</p>
+
+<p>mall</p>
+<p>@ViewBag.cod1</p>
+<p>rubro</p>
+<p>@ViewBag.cod2</p>
+
+<div class="list-group">
+    @{
+        foreach (Tienda tienda in ViewBag.lista_tiendas)
+        {
+            @Html.ActionLink(@tienda.nomb_com_c_vnomb, "DetalleTienda", "Home", tienda, new { @class = "list-group-item list-group-item-action" })
+        }
+    }
+</div>
+
+
