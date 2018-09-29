@@ -33,6 +33,17 @@ namespace SolucionWeb.Controllers
 
         public ActionResult DetalleTienda(Tienda tienda)
         {
+            Mall mall = (Mall)Session["Mall"];
+            var client = new RestClient("https://api.devrealplazaonline.com/v1/coordinates?pi_inm_c_icod="+mall.inm_c_icod+"&ps_loc_c_ccod="+tienda.loc_c_ccod);
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Postman-Token", "31bcf8d9-f3b2-4d49-b996-4f991e642505");
+            request.AddHeader("Cache-Control", "no-cache");
+            request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+            IRestResponse response = client.Execute(request);
+            RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
+            var lista = deserial.Deserialize<List<Ubicacion>>(response);
+
+            ViewBag.ubicaciones = lista;
             ViewBag.tienda = tienda;
             return View();
         }
@@ -43,20 +54,19 @@ namespace SolucionWeb.Controllers
             Mall mall = (Mall)Session["Mall"];
             string codigo_mall = mall.inm_c_icod;
             string codigo_rubro = rubro.rubro_c_yid.ToString();
+            List<Rubro> lista_rubros = (List<Rubro>)Session["ListaRubros"];
 
-            var client = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod="+codigo_mall+"&pi_rubro_c_yid="+codigo_rubro);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
-            request.AddHeader("Cache-Control", "no-cache");
-            request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
-            IRestResponse response = client.Execute(request);
             RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
-            var lista = deserial.Deserialize<List<Tienda>>(response);
+            var client2 = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod=" + mall.inm_c_icod + "&pi_rubro_c_yid=" + rubro.rubro_c_yid);
+            var request2 = new RestRequest(Method.GET);
+            request2.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
+            request2.AddHeader("Cache-Control", "no-cache");
+            request2.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+            IRestResponse response2 = client2.Execute(request2);
+            var lista_tien = deserial.Deserialize<List<Tienda>>(response2);
 
-            ViewBag.lista_tiendas = lista;
+            ViewBag.lista_tiendas = lista_tien;
             ViewBag.Rubro = rubro;
-            ViewBag.cod1 = codigo_mall;
-            ViewBag.cod2 = codigo_rubro;
             return View();
         }
 
@@ -70,11 +80,31 @@ namespace SolucionWeb.Controllers
             request.AddHeader("Cache-Control", "no-cache");
             request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
             IRestResponse response = client.Execute(request);
-            var lista = deserial.Deserialize<List<Rubro>>(response);
+            var lista_rub = deserial.Deserialize<List<Rubro>>(response);
 
-            ViewBag.lista_rubros = lista;
+            List<Rubro> lista_rubros = new List<Rubro>();
+            List<Tienda> lista_tiendas = new List<Tienda>();
+
+            //foreach (Rubro rubro_ in lista_rub)
+            //{
+            //    var client2 = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod=" + mall.inm_c_icod + "&pi_rubro_c_yid=" + rubro_.rubro_c_yid);
+            //    var request2 = new RestRequest(Method.GET);
+            //    request2.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
+            //    request2.AddHeader("Cache-Control", "no-cache");
+            //    request2.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+            //    IRestResponse response2 = client2.Execute(request2);
+            //    var lista_tien = deserial.Deserialize<List<Tienda>>(response2);
+            //    if (lista_tien.Count > 0)
+            //    {
+            //        lista_rubros.Add(rubro_);
+            //    }    
+            //}
+
+            lista_rubros = lista_rub;
+            ViewBag.lista_rubros = lista_rubros;
             ViewBag.mall = mall;
             Session["Mall"] = mall;
+            Session["ListaRubros"] = lista_rubros;
             return View();
         }
 
@@ -99,7 +129,7 @@ namespace SolucionWeb.Controllers
 
             // Consulta API de Busqueda de Mall por Departamento
             string codigo_depa = dep_to_code[departamento];
-            var client2 = new RestClient("https://api.devrealplazaonline.com/v1/real-estate?ps_depa_c_ccod=15");
+            var client2 = new RestClient("https://api.devrealplazaonline.com/v1/real-estate?ps_depa_c_ccod="+codigo_depa);
             var request2 = new RestRequest(Method.GET);
             request2.AddHeader("Postman-Token", "b08fa9af-9f4d-429f-a2d2-e84557223e29");
             request2.AddHeader("Cache-Control", "no-cache");
@@ -242,5 +272,14 @@ namespace SolucionWeb.Controllers
         public int inm_c_icod { get; set; }
         public string loc_c_ccod { get; set; }
         public string nomb_com_c_vnomb { get; set; }
+    }
+
+    public class Ubicacion
+    {
+        public int orden { get; set; }
+        public int x1 { get; set; }
+        public int y1 { get; set; }
+        public int x2 { get; set; }
+        public int y2 { get; set; }
     }
 }
