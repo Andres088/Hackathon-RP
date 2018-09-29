@@ -20,14 +20,14 @@
         @{
             foreach (consulta cons in ViewBag.lista_consultas)
             {
-        <tr>
-            <th scope="row">@cons.query_id</th>
-            <td>@cons.departamento</td>
-            <td>@cons.mall</td>
-            <td>@cons.rubro</td>
-            <td>@cons.tienda</td>
-            <td>@cons.fecha.ToString()</td>
-        </tr>
+                <tr>
+                    <th scope="row">@cons.query_id</th>
+                    <td>@cons.departamento</td>
+                    <td>@cons.mall</td>
+                    <td>@cons.rubro</td>
+                    <td>@cons.tienda</td>
+                    <td>@cons.fecha.ToString()</td>
+                </tr>
 
             }
         }

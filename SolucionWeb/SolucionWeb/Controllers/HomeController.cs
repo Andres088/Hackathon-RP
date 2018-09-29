@@ -31,21 +31,6 @@ namespace SolucionWeb.Controllers
             return View();
         }
 
-        public ActionResult Reportes()
-        {
-            using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
-            {
-                var x = from cons in obj.consulta
-                        select cons;
-
-                List<consulta> lista_consultas = x.ToList();
-                ViewBag.lista_consultas = lista_consultas;
-
-                return View();
-            }
-            
-        }
-
 
         public ActionResult DetalleTienda(Tienda tienda)
         {
@@ -197,7 +182,32 @@ namespace SolucionWeb.Controllers
         [HttpPost]
         public ActionResult SignIn(string dni)
         {
+            int n_dni = 0;
+            try {
+                n_dni = Int32.Parse(dni);
+            }
+            catch (FormatException e)
+            {
+                ViewBag.mensaje = "Ingrese un DNI valido";
+                return View();
+            }
             
+
+            if(n_dni == 44337350)
+            {
+                using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
+                {
+                    var x = from cons in obj.consulta
+                            select cons;
+
+                    var lista_consultas = x.ToList();
+                    ViewBag.lista_consultas = lista_consultas;
+
+                    return View("Reportes");
+                }
+            }
+
+
             if (dni.Length != 8)
             {
                 ViewBag.mensaje = "Ingrese un DNI válido.";
@@ -205,8 +215,8 @@ namespace SolucionWeb.Controllers
             }
             try
             {
-                int n_dni = Int32.Parse(dni);
-                if (n_dni == 06310996) return View("Reportes");
+                
+                
                 using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
                 {
                     var x = from usr in obj.usuario
@@ -226,11 +236,7 @@ namespace SolucionWeb.Controllers
                 ViewBag.mensaje = "DNI no registrado";
                 return View();
             }
-            catch (FormatException e)
-            {
-                ViewBag.mensaje = "Ingrese un DNI valido" ;
-                return View();
-            }
+            
 
         }
 
