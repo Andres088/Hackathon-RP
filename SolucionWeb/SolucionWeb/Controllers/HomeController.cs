@@ -43,20 +43,19 @@ namespace SolucionWeb.Controllers
             Mall mall = (Mall)Session["Mall"];
             string codigo_mall = mall.inm_c_icod;
             string codigo_rubro = rubro.rubro_c_yid.ToString();
+            List<Rubro> lista_rubros = (List<Rubro>)Session["ListaRubros"];
 
-            var client = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod="+codigo_mall+"&pi_rubro_c_yid="+codigo_rubro);
-            var request = new RestRequest(Method.GET);
-            request.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
-            request.AddHeader("Cache-Control", "no-cache");
-            request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
-            IRestResponse response = client.Execute(request);
             RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
-            var lista = deserial.Deserialize<List<Tienda>>(response);
+            var client2 = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod=" + mall.inm_c_icod + "&pi_rubro_c_yid=" + rubro.rubro_c_yid);
+            var request2 = new RestRequest(Method.GET);
+            request2.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
+            request2.AddHeader("Cache-Control", "no-cache");
+            request2.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+            IRestResponse response2 = client2.Execute(request2);
+            var lista_tien = deserial.Deserialize<List<Tienda>>(response2);
 
-            ViewBag.lista_tiendas = lista;
+            ViewBag.lista_tiendas = lista_tien;
             ViewBag.Rubro = rubro;
-            ViewBag.cod1 = codigo_mall;
-            ViewBag.cod2 = codigo_rubro;
             return View();
         }
 
@@ -70,11 +69,31 @@ namespace SolucionWeb.Controllers
             request.AddHeader("Cache-Control", "no-cache");
             request.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
             IRestResponse response = client.Execute(request);
-            var lista = deserial.Deserialize<List<Rubro>>(response);
+            var lista_rub = deserial.Deserialize<List<Rubro>>(response);
 
-            ViewBag.lista_rubros = lista;
+            List<Rubro> lista_rubros = new List<Rubro>();
+            List<Tienda> lista_tiendas = new List<Tienda>();
+
+            foreach (Rubro rubro_ in lista_rub)
+            {
+                var client2 = new RestClient("https://api.devrealplazaonline.com/v1/local?pi_inm_c_icod=" + mall.inm_c_icod + "&pi_rubro_c_yid=" + rubro_.rubro_c_yid);
+                var request2 = new RestRequest(Method.GET);
+                request2.AddHeader("Postman-Token", "19cb3c19-d472-461d-be49-a7777430042c");
+                request2.AddHeader("Cache-Control", "no-cache");
+                request2.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
+                IRestResponse response2 = client2.Execute(request2);
+                var lista_tien = deserial.Deserialize<List<Tienda>>(response2);
+                if (lista_tien.Count > 0)
+                {
+                    lista_rubros.Add(rubro_);
+                }    
+            }
+
+
+            ViewBag.lista_rubros = lista_rubros;
             ViewBag.mall = mall;
             Session["Mall"] = mall;
+            Session["ListaRubros"] = lista_rubros;
             return View();
         }
 
