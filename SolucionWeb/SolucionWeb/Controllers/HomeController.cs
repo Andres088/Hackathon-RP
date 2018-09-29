@@ -31,9 +31,9 @@ namespace SolucionWeb.Controllers
             return View();
         }
 
-        public ActionResult Rubro(string pass_mall)
+        public ActionResult Rubro(string mall)
         {
-            ViewBag.mall = pass_mall;
+            ViewBag.mall = mall;
             return View();
         }
 
@@ -65,8 +65,9 @@ namespace SolucionWeb.Controllers
             request2.AddHeader("x-api-key", "TDy86NqDhGkZcdbkGeJ45sFL55o69954KjVIaU6h");
             IRestResponse response2 = client2.Execute(request2);
             var lista2 = deserial.Deserialize<List<Mall>>(response2);
-            List<string> lista_malls = new List<string>();
-            foreach (Mall mimall in lista2) lista_malls.Add(mimall.inm_c_vnomb);
+            //List<string> lista_malls = new List<string>();
+            //foreach (Mall mimall in lista2) lista_malls.Add(mimall.inm_c_vnomb);
+            List<Mall> lista_malls = lista2;
 
             ViewBag.lista_malls = lista_malls;
             return View();
@@ -184,7 +185,7 @@ namespace SolucionWeb.Controllers
     {
         public string inm_c_icod { get; set; }
         public string inm_c_vnomb { get; set; }
-        //public float inm_c_vlatitud { get; set; }
-        //public float inm_c_vlongitud { get; set; }
+        public float inm_c_vlatitud { get; set; }
+        public float inm_c_vlongitud { get; set; }
     }
 }
