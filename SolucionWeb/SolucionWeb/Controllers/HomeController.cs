@@ -33,7 +33,8 @@ namespace SolucionWeb.Controllers
 
         public ActionResult DetalleTienda(Tienda tienda)
         {
-            var client = new RestClient("https://api.devrealplazaonline.com/v1/coordinates?pi_inm_c_icod=5&ps_loc_c_ccod=LC-113");
+            Mall mall = (Mall)Session["Mall"];
+            var client = new RestClient("https://api.devrealplazaonline.com/v1/coordinates?pi_inm_c_icod="+mall.inm_c_icod+"&ps_loc_c_ccod="+tienda.loc_c_ccod);
             var request = new RestRequest(Method.GET);
             request.AddHeader("Postman-Token", "31bcf8d9-f3b2-4d49-b996-4f991e642505");
             request.AddHeader("Cache-Control", "no-cache");
