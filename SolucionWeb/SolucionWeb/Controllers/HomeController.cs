@@ -16,8 +16,13 @@ namespace SolucionWeb.Controllers
                 var x = from usr in obj.usuario
                         where usr.dni == 58986728
                         select usr.nombre;
-                string variable = x.ToList().ElementAt(0);
-                ViewBag.nombre = variable;
+
+
+                    string variable = x.ToList().ElementAt(0);
+                    ViewBag.nombre = variable;
+    
+                    ViewBag.nombre = "No se encontro";
+
                 return View();
             }
                 
@@ -33,8 +38,36 @@ namespace SolucionWeb.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+            ViewBag.Respuesta = "";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult VerificarUsuario(string reportName)
+        {
+            ViewBag.Message = "Your application description page.";
+            ViewBag.Respuesta = "muere " + reportName;
+
+
+            return View("About");
+        }
+
+
+        [HttpPost]
+        public ActionResult About(string reportName)
+        {
+            ViewBag.Message = "Your application description page.";
+            ViewBag.Respuesta = "hola " + reportName;
 
             return View();
         }
+
+        public ActionResult SignUp()
+        {
+
+
+            return View();
+        }
+
     }
 }

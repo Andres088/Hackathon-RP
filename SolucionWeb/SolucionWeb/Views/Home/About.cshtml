@@ -1,7 +1,15 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.nombre</h2>
+
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+@using (Html.BeginForm("VerificarUsuario", "Home"))
+{
+    <input type="text" name="reportName" />
+    <input type="submit" />
+}
+
+<h3>@ViewBag.Respuesta</h3>
+
+
