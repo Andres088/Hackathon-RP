@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SolucionWeb.Models;
 
 namespace SolucionWeb.Controllers
 {
@@ -10,7 +11,16 @@ namespace SolucionWeb.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
+            {
+                var x = from usr in obj.usuario
+                        where usr.dni == 58986728
+                        select usr.nombre;
+                string variable = x.ToList().ElementAt(0);
+                ViewBag.nombre = variable;
+                return View();
+            }
+                
         }
 
         public ActionResult About()
