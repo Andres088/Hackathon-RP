@@ -254,6 +254,7 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Home\Tienda.cshtml" />
     <Content Include="Views\Home\DetalleTienda.cshtml" />
+    <Content Include="Views\Home\Reportes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

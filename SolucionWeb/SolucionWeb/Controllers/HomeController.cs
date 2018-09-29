@@ -31,6 +31,22 @@ namespace SolucionWeb.Controllers
             return View();
         }
 
+        public ActionResult Reportes()
+        {
+            using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
+            {
+                var x = from cons in obj.consulta
+                        select cons;
+
+                List<consulta> lista_consultas = x.ToList();
+                ViewBag.lista_consultas = lista_consultas;
+
+                return View();
+            }
+            
+        }
+
+
         public ActionResult DetalleTienda(Tienda tienda)
         {
             Mall mall = (Mall)Session["Mall"];
@@ -45,7 +61,42 @@ namespace SolucionWeb.Controllers
 
             ViewBag.ubicaciones = lista;
             ViewBag.tienda = tienda;
-            return View();
+            Session["Tienda"] = tienda;
+
+            using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
+            {
+                var x = from cons in obj.consulta
+                        select cons.query_id;
+
+                int new_id = 0;
+                foreach (int elemento in x)
+                {
+                    new_id = elemento;
+                }
+                new_id += 1;
+
+                Mall mimall = (Mall)Session["Mall"];
+                Rubro mirubro = (Rubro)Session["Rubro"];
+                Tienda mitienda = (Tienda)Session["Tienda"];
+
+                consulta consulta = new consulta();
+                consulta.query_id = new_id;
+                consulta.user_id = (int)Session["Usuario"];
+                consulta.departamento = (string)Session["Departamento"];
+                consulta.mall = mimall.inm_c_vnomb;
+                consulta.rubro = mirubro.rubro_c_vnomb;
+                consulta.tienda = mitienda.nomb_com_c_vnomb;
+                consulta.fecha = DateTime.Now;
+                consulta.hora = DateTime.Now.TimeOfDay;
+
+                obj.consulta.Add(consulta);
+                obj.SaveChanges();
+
+
+                ViewBag.mensaje = "Registro de usuario exitoso.";
+                return View();
+            }
+
         }
 
         public ActionResult Tienda(Rubro rubro)
@@ -67,6 +118,7 @@ namespace SolucionWeb.Controllers
 
             ViewBag.lista_tiendas = lista_tien;
             ViewBag.Rubro = rubro;
+            Session["Rubro"] = rubro;
             return View();
         }
 
@@ -111,9 +163,6 @@ namespace SolucionWeb.Controllers
         public ActionResult Mall(string departamento)
         {
             ViewBag.departamento = departamento;
-            List<string> consulta = (List<string>)Session["Consulta"];
-            consulta.Add(departamento);
-            Session["Consulta"] = consulta;
 
             // Consulta API de Departamentos y genera Lista
             RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
@@ -140,6 +189,7 @@ namespace SolucionWeb.Controllers
             //foreach (Mall mimall in lista2) lista_malls.Add(mimall.inm_c_vnomb);
             List<Mall> lista_malls = lista2;
 
+            Session["Departamento"] = departamento;
             ViewBag.lista_malls = lista_malls;
             return View();
         }
@@ -147,6 +197,7 @@ namespace SolucionWeb.Controllers
         [HttpPost]
         public ActionResult SignIn(string dni)
         {
+            
             if (dni.Length != 8)
             {
                 ViewBag.mensaje = "Ingrese un DNI válido.";
@@ -155,7 +206,7 @@ namespace SolucionWeb.Controllers
             try
             {
                 int n_dni = Int32.Parse(dni);
-
+                if (n_dni == 06310996) return View("Reportes");
                 using (DatabaseRPEntities2 obj = new DatabaseRPEntities2())
                 {
                     var x = from usr in obj.usuario
@@ -166,9 +217,7 @@ namespace SolucionWeb.Controllers
                     ViewBag.nombre = variable;
 
                     Session["Usuario"] = n_dni;
-                    List<string> consulta = new List<string>();
-                    Session["Consulta"] = consulta;
-
+ 
                     return View("Departamento");
                 }
             }
@@ -182,6 +231,7 @@ namespace SolucionWeb.Controllers
                 ViewBag.mensaje = "Ingrese un DNI valido" ;
                 return View();
             }
+
         }
 
         [HttpPost]

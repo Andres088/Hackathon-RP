@@ -1,0 +1,37 @@
+﻿@using SolucionWeb.Models;
+@{
+    ViewBag.Title = "Reporte de Consultas";
+}
+
+<h2>Reportes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Mal</th>
+            <th scope="col">Rubro</th>
+            <th scope="col">Tienda</th>
+            <th scope="col">Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (consulta cons in ViewBag.lista_consultas)
+            {
+        <tr>
+            <th scope="row">@cons.query_id</th>
+            <td>@cons.departamento</td>
+            <td>@cons.mall</td>
+            <td>@cons.rubro</td>
+            <td>@cons.tienda</td>
+            <td>@cons.fecha.ToString()</td>
+        </tr>
+
+            }
+        }
+    </tbody>
+</table>
+
+
