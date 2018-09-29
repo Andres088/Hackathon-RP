@@ -160,7 +160,7 @@ input[type="text"] {
 
 #mapa_peru {
     position: absolute;
-    top: 5mm;
+    top: 25mm;
     width: 60%;
     left: 10%;
     bottom: 20%;
@@ -181,6 +181,10 @@ input[type="text"] {
 #espaciadora {
     padding-bottom: 20px;
     padding-top: 20px;
+}
+
+#lista_mall {
+    font-family: Bahnschrift;
 }
 
 
