@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+}
+
+
+
+
+<div class="wrapper">
+
+
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-signin">
+            <p><h2 class="form-signin-heading text-center">Registrate!</h2></p>
+            <p><small>Digite su DNI:</small></p>
+            <p><input type="text" class="form-control" name="dni" /></p>
+            <p><small>Digite su nombre:</small></p>
+            <p><input type="text" class="form-control" name="nombre" /></p>
+            <p><small>Digite su Apellido Paterno:</small></p>
+            <p><input type="text" class="form-control" name="apellidoPaterno" /></p>
+            <p><small>Digite su Apellido Materno:</small></p>
+            <p><input type="text" class="form-control" name="apellidoMaterno" /></p>
+            <p><small>Digite su E-mail:</small></p>
+            <p><input type="email" class="form-control" name="email" /></p>
+            <p><small>Digite su Teléfono:</small></p>
+            <p><input type="text" class="form-control" name="telefono" /></p>
+            <p><small>Digite su Departamento:</small></p>
+            <p><input type="text" class="form-control"style="padding-bottom:20px" name="departamento" />
+            
+            <p><button class="btn btn-lg btn-success btn-block" type="submit" style="padding-bottom:20px" >Registrate</button></p>
+        </div>
+    }
+
+
+</div>
+
+<p>@ViewBag.mensaje</p>

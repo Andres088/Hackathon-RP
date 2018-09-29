@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Departamento";
+
+
+    List<string> Departamentos = new List<string>
+    { "LIMA","ANCASH","AREQUIPA","CAJAMARCA","CUSCO","HUANUCO",
+      "JUNIN","LA LIBERTAD","LAMBAYEQUE","PIURA","PUNO","UCAYALI"};
+}
+
+
+
+<div class="container well">
+    
+    
+    <div class="row">
+        <div class="col-lg-6">
+            
+            <h1 class="text-center">Bienvenido @ViewBag.nombre</h1>
+            <h2 class="text-center" style="padding-bottom:20px">¿En qué departamento estás?</h2>
+
+            <div class="list-group text-center" id="lista_departamentos">
+                @{
+                    foreach (string departamento in Departamentos)
+                    {
+                        @Html.ActionLink(@departamento, "Mall", "Home", new { departamento = @departamento }, new { @class = "list-group-item list-group-item-action" })
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="col-lg-6" id="centrar_peru">
+            <img src="~/Content/img/mapa_peru.svg" alt="mapa_peru" id="mapa_peru"/>
+        </div>
+    </div>
+
+
+
+</div>
+
+
