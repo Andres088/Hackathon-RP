@@ -72,10 +72,50 @@ input[type="text"] {
 
 #color1 {
     background-color: #2fe6ca;
+    overflow: hidden;
 }
 
 #color2 {
     background-color: #edf2bd;
 }
+
+#logo-con {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: all .5s ease-in-out;
+}
+
+#color1:hover #logo-con {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+#logo-con:hover {
+    filter: opacity(.5);
+}
+
+#logo-res {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: all .5s ease-in-out;
+}
+
+#color2:hover #logo-res {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+#logo-res:hover {
+    filter: opacity(.5);
+}
+
 
 
