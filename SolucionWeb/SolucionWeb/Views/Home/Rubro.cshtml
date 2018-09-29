@@ -1,11 +1,21 @@
-﻿
+﻿@using SolucionWeb.Controllers;
+
 @{
     ViewBag.Title = "Rubro";
 }
 
 <h2>Rubro</h2>
 
-<h3>Estás en @ViewBag.mall</h3>
+<h3>Estás en @ViewBag.mall.inm_c_vnomb</h3>
 
-<p>Visualiza las tiendas de ese mall</p>
+<p>En qué segmento de tiendas estás interesado?</p>
 
+
+<div class="list-group">
+    @{
+        foreach (Rubro rubro in ViewBag.lista_rubros)
+        {
+            @Html.ActionLink(@rubro.rubro_c_vnomb, "Tienda", "Home", rubro, new { @class = "list-group-item list-group-item-action" })
+        }
+    }
+</div>
