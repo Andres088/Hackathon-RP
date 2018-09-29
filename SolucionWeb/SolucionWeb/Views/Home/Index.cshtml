@@ -2,6 +2,34 @@
     ViewBag.Title = "Home Page";
 }
 
-<p>@Html.ActionLink("Sign In", "SignIn", "Home")</p>
 
-<p>@Html.ActionLink("Sign Up", "SignUp", "Home")</p>
+    <div class="panel-falso"></div>
+
+
+    <div class="well">
+        <div class="row">
+            <div class="col-lg-6" id="color1">
+                    <h1 class="text-center"><strong>Ya tienes una cuenta?</strong></h1>
+                    
+                    <p>@Html.ActionLink("Conéctate", "SignIn", "Home")</p>
+                
+            </div>
+
+            <div class="col-lg-6" id="color2">
+                <h1 class="text-center"><strong>Usuario Nuevo?</strong></h1>
+                <p>@Html.ActionLink("Registrate Ya!", "SignUp", "Home")</p>
+                
+            </div>
+        </div>
+    </div>
+    
+
+    
+    
+
+     
+
+  
+
+
+
