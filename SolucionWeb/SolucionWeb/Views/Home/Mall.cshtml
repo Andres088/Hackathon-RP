@@ -4,17 +4,27 @@
     ViewBag.Title = "Mall";
 }
 
-<h2>Mall</h2>
-<h3>Estás en @ViewBag.departamento</h3>
+<div class="container well">
+    <div class="row">
+
+            <h3 class="text-center">Estás en @ViewBag.departamento</h3>
+            <h2 class="text-center" style="padding-bottom:20px">A qué mall deseas ir?</h2>
+
+    </div>
+    <div class="row">
 
 
-<h2>A qué mall deseas ir?</h2>
-
-<div class="list-group">
-    @{
-        foreach (Mall mall in ViewBag.lista_malls)
-        {
-            @Html.ActionLink(@mall.inm_c_vnomb, "Rubro", "Home", mall, new { @class = "list-group-item list-group-item-action" })
-        }
-    }
+        <div class="list-group text-center" id="lista_mall">
+            
+            @{
+                foreach (Mall mall in ViewBag.lista_malls)
+                {
+                    @Html.ActionLink(@mall.inm_c_vnomb, "Rubro", "Home", mall, new { @class = "list-group-item list-group-item-action" })
+                }
+            }
+        </div>
+    </div>
 </div>
+
+
+
