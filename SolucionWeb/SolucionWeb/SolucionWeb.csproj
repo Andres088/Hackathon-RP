@@ -190,6 +190,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\logo-conecta.jpg" />
     <Content Include="Content\img\logo-registro.jpg" />
+    <Content Include="Content\img\mezcla.jpg" />
     <Content Include="Content\img\rp.jpg" />
     <Content Include="Content\img\sdsds.jpg" />
     <Content Include="favicon.ico" />
@@ -246,6 +247,8 @@
     <Content Include="Views\Home\Departamento.cshtml" />
     <Content Include="Views\Home\Mall.cshtml" />
     <Content Include="Views\Home\Rubro.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

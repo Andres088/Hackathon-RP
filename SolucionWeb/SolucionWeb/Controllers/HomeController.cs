@@ -31,7 +31,7 @@ namespace SolucionWeb.Controllers
             return View();
         }
 
-        public ActionResult Rubro(string mall)
+        public ActionResult Rubro(Mall mall)
         {
             ViewBag.mall = mall;
             return View();
