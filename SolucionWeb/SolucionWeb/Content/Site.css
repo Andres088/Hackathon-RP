@@ -158,4 +158,29 @@ input[type="text"] {
 
 }
 
+#mapa_peru {
+    position: absolute;
+    top: 5mm;
+    width: 60%;
+    left: 10%;
+    bottom: 20%;
+    transition: all .5s ease-in-out
+}
+
+    #mapa_peru:hover {
+        filter: opacity(.5)
+    }
+
+#centrar_peru {
+    text-align: center;
+    padding-top: 150px;
+    padding-bottom: 10px;
+
+}
+
+#espaciadora {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
 
